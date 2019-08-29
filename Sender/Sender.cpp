@@ -59,7 +59,7 @@ int main()
 		obj1.a = 33;
 		obj1.b = 45.2;
 		
-		send("MySharedMemory",reinterpret_cast<const byte*>(obj), sizeof(A));
+		send("MySharedMemory",reinterpret_cast<const byte*>(&obj1), sizeof(A));
 	}
 	catch (const std::exception& exc)
 	{
@@ -92,17 +92,3 @@ int main()
 	else {
 		printf("Process created. \n");
 	}*/
-
-	//struct shm_remove
-	//{
-	//	shm_remove() { shared_memory_object::remove("MySharedMemory"); }
-	//	~shm_remove() { shared_memory_object::remove("MySharedMemory"); }
-	//} remover;
-	////Create a shared memory object.
-	//shared_memory_object shm(create_only, "MySharedMemory", read_write);
-	////Set size
-	//shm.truncate(1000);
-	////Map the whole shared memory in this process
-	//mapped_region region(shm, read_write);
-	////Write all the memory to 1
-	//std::memset(region.get_address(), 1, region.get_size());

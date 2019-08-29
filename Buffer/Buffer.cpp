@@ -6,11 +6,17 @@
 #include <boost/interprocess/mapped_region.hpp>
 #include <boost/interprocess/sync/interprocess_mutex.hpp>
 #include <boost/interprocess/sync/interprocess_semaphore.hpp>
+#include <boost/unordered_map.hpp>
 using namespace std;
 
 int main()
 {
 	using namespace boost::interprocess;
+	using namespace boost::unordered;
+	unordered_map<const char*, int> m;
+	m.emplace("Hello woeld", 34);
+	m.emplace("nice", 3);
+	cout << m["Hello woeld"] << " " << m["nice"] << endl;
 	setlocale(0, "rus");
 	constexpr size_t dataSize = 10;
 	constexpr size_t syncSize = sizeof(interprocess_mutex)+
@@ -40,14 +46,6 @@ int main()
 	int* syncAddrInt = reinterpret_cast<int*>(syncAdress);
 	while (true)
 	{
-		/*for (std::size_t i = 0; i < 3; ++i)
-		{
-			cout << (int) * (syncAdress + 4 * i) << " "
-				<< (int) * (syncAdress + 1 + 4 * i) << " "
-				<< (int) * (syncAdress + 2 + 4 * i) << " "
-				<< (int) * (syncAdress + 3 + 4 * i) << endl;
-			
-		}*/
 		cout << "Mutex: " << syncAddrInt[0] << endl;
 		cout << "Full: " << syncAddrInt[1] << endl;
 		cout << "Empty: " << syncAddrInt[2] << endl;

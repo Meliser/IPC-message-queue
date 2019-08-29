@@ -60,7 +60,6 @@ int main()
 	{
 		
 		size_t toReceive = sizeof(A);
-		//byte message[sizeof(A)];
 		A* obj2 = new A;
 		
 		string name = "MySharedMemory";
@@ -72,7 +71,7 @@ int main()
 			return toReceive == 0;
 		});
 
-		
+		cout << obj2->a << " " << obj2->b << endl;
 	}
 	catch (const std::exception& exc)
 	{
